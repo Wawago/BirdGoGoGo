@@ -1,0 +1,170 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,bird_png,bird_json,background_png,ground_png,lower_pipe_png,upper_pipe_png,sfx_die_mp3,sfx_hit_mp3,sfx_point_mp3,sfx_jump_mp3,button_down_png,button_up_png,checkbox_select_disabled_png,checkbox_select_down_png,checkbox_select_up_png,checkbox_unselect_png,thumb_pb_png,track_pb_png,radiobutton_select_disabled_png,radiobutton_select_down_png,radiobutton_select_up_png,radiobutton_unselect_png,roundthumb_png,track_sb_png,thumb_png,track_png,tracklight_png,handle_png,off_png,on_png,coin_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/bird.png",
+			"type": "image",
+			"name": "bird_png"
+		},
+		{
+			"url": "config/bird.json",
+			"type": "json",
+			"name": "bird_json"
+		},
+		{
+			"url": "assets/background.png",
+			"type": "image",
+			"name": "background_png"
+		},
+		{
+			"url": "assets/ground.png",
+			"type": "image",
+			"name": "ground_png"
+		},
+		{
+			"name": "lower_pipe_png",
+			"type": "image",
+			"url": "assets/lower_pipe.png"
+		},
+		{
+			"name": "upper_pipe_png",
+			"type": "image",
+			"url": "assets/upper_pipe.png"
+		},
+		{
+			"name": "sfx_die_mp3",
+			"type": "sound",
+			"url": "sounds/sfx_die.mp3"
+		},
+		{
+			"name": "sfx_hit_mp3",
+			"type": "sound",
+			"url": "sounds/sfx_hit.mp3"
+		},
+		{
+			"name": "sfx_point_mp3",
+			"type": "sound",
+			"url": "sounds/sfx_point.mp3"
+		},
+		{
+			"name": "sfx_jump_mp3",
+			"type": "sound",
+			"url": "sounds/sfx_jump.mp3"
+		},
+		{
+			"name": "button_down_png",
+			"type": "image",
+			"url": "assets/Button/button_down.png"
+		},
+		{
+			"name": "button_up_png",
+			"type": "image",
+			"url": "assets/Button/button_up.png"
+		},
+		{
+			"name": "checkbox_select_disabled_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_select_disabled.png"
+		},
+		{
+			"name": "checkbox_select_down_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_select_down.png"
+		},
+		{
+			"name": "checkbox_select_up_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_select_up.png"
+		},
+		{
+			"name": "checkbox_unselect_png",
+			"type": "image",
+			"url": "assets/CheckBox/checkbox_unselect.png"
+		},
+		{
+			"name": "thumb_pb_png",
+			"type": "image",
+			"url": "assets/ProgressBar/thumb_pb.png"
+		},
+		{
+			"name": "track_pb_png",
+			"type": "image",
+			"url": "assets/ProgressBar/track_pb.png"
+		},
+		{
+			"name": "radiobutton_select_disabled_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_select_disabled.png"
+		},
+		{
+			"name": "radiobutton_select_down_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_select_down.png"
+		},
+		{
+			"name": "radiobutton_select_up_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_select_up.png"
+		},
+		{
+			"name": "radiobutton_unselect_png",
+			"type": "image",
+			"url": "assets/RadioButton/radiobutton_unselect.png"
+		},
+		{
+			"name": "roundthumb_png",
+			"type": "image",
+			"url": "assets/ScrollBar/roundthumb.png"
+		},
+		{
+			"name": "track_sb_png",
+			"type": "image",
+			"url": "assets/ScrollBar/track_sb.png"
+		},
+		{
+			"name": "thumb_png",
+			"type": "image",
+			"url": "assets/Slider/thumb.png"
+		},
+		{
+			"name": "track_png",
+			"type": "image",
+			"url": "assets/Slider/track.png"
+		},
+		{
+			"name": "tracklight_png",
+			"type": "image",
+			"url": "assets/Slider/tracklight.png"
+		},
+		{
+			"name": "handle_png",
+			"type": "image",
+			"url": "assets/ToggleSwitch/handle.png"
+		},
+		{
+			"name": "off_png",
+			"type": "image",
+			"url": "assets/ToggleSwitch/off.png"
+		},
+		{
+			"name": "on_png",
+			"type": "image",
+			"url": "assets/ToggleSwitch/on.png"
+		},
+		{
+			"name": "coin_png",
+			"type": "image",
+			"url": "assets/coin.png"
+		}
+	]
+}
