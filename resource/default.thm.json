@@ -16,7 +16,6 @@
   },
   "autoGenerateExmlsList": true,
   "exmls": [
-    "resource/eui_skins/ButtonSkin.exml",
     "resource/eui_skins/HScrollBarSkin.exml",
     "resource/eui_skins/HSliderSkin.exml",
     "resource/eui_skins/ItemRendererSkin.exml",
@@ -30,7 +29,6 @@
     "resource/eui_skins/ShareButtonSmallSkin.exml",
     "resource/eui_skins/SoundButtonSkin.exml",
     "resource/eui_skins/StartButtonSkin.exml",
-    "resource/eui_skins/TextInputSkin.exml",
     "resource/eui_skins/VScrollBarSkin.exml"
   ]
 }

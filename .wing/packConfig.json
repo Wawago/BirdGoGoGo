@@ -2,7 +2,7 @@
     "useClip": false,
     "maxImageWidth": 2048,
     "maxImageHeight": 2048,
-    "defaultResPath": "/Users/tianxuwang/Documents/EgretProjects/FlappyBird/resource/default.res.json",
+    "defaultResPath": "/Users/tianxuwang/Documents/EgretProjects/BirdGoGoGo/resource/default.res.json",
     "packGroups": {
         "preload": true
     }

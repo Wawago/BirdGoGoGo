@@ -107,9 +107,9 @@ var PipeGroup = (function () {
     PipeGroup.groundHeight = 210;
     PipeGroup.pipeHeight = 753;
     PipeGroup.pipeWidth = 142;
-    PipeGroup.pipeGapX = 400;
-    PipeGroup.pipeGapY = 280;
-    PipeGroup.minPipeHeight = 130;
+    PipeGroup.pipeGapX = 480;
+    PipeGroup.pipeGapY = 250;
+    PipeGroup.minPipeHeight = 100;
     return PipeGroup;
 }());
 __reflect(PipeGroup.prototype, "PipeGroup");

@@ -16,8 +16,10 @@ var GameView = (function (_super) {
     function GameView() {
         var _this = _super.call(this) || this;
         _this.birdBodyRadius = 38;
-        _this.gravity = 25;
-        _this.birdJumpSpeed = -13;
+        _this.gravity = 20;
+        _this.birdJumpVelocity = -10;
+        _this.birdJumpAngle = 0.8;
+        _this.birdJumpAngularVelocity = -5;
         // game state
         _this.isPrepared = false;
         _this.isStart = false;
@@ -84,7 +86,9 @@ var GameView = (function (_super) {
                 this.prepareGameStart();
             if (!this.isStart)
                 this.gameStart();
-            this.birdBody.velocity[1] = this.birdJumpSpeed;
+            this.birdBody.velocity[1] = this.birdJumpVelocity;
+            this.birdBody.angle = this.birdJumpAngle;
+            this.birdBody.angularVelocity = this.birdJumpAngularVelocity;
             this.bird.jump();
         }
     };
@@ -237,7 +241,7 @@ var GameView = (function (_super) {
         this.gameOverPanel.updateGUI();
     };
     // speeds
-    GameView.speedX = -2.5;
+    GameView.speedX = -3;
     return GameView;
 }(egret.Sprite));
 __reflect(GameView.prototype, "GameView");

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,bird_png,bird_json,background_png,ground_png,lower_pipe_png,upper_pipe_png,sfx_hit_mp3,sfx_point_mp3,sfx_jump_mp3,button_down_png,button_up_png,thumb_pb_png,track_pb_png,roundthumb_png,track_sb_png,coin_png,coin_json,sound_off_btn_png,sound_on_btn_png,start_btn_png,logo_png,share_btn_png,rank_btn_png,gameover_panel_png,restart_btn_png,guide_png,share_btn_s_png,rank_btn_s_png,font_red_fnt,font_red_png,font_grey_fnt,font_grey_png,scoreboard_png",
+			"keys": "description_json,bird_png,bird_json,background_png,ground_png,lower_pipe_png,upper_pipe_png,sfx_hit_mp3,sfx_point_mp3,sfx_jump_mp3,thumb_pb_png,track_pb_png,roundthumb_png,track_sb_png,coin_png,coin_json,sound_off_btn_png,sound_on_btn_png,start_btn_png,logo_png,share_btn_png,rank_btn_png,gameover_panel_png,restart_btn_png,guide_png,share_btn_s_png,rank_btn_s_png,font_red_fnt,font_red_png,font_grey_fnt,font_grey_png,scoreboard_png",
 			"name": "preload"
 		}
 	],
@@ -55,16 +55,6 @@
 			"url": "sounds/sfx_jump.mp3",
 			"type": "sound",
 			"name": "sfx_jump_mp3"
-		},
-		{
-			"url": "assets/Button/button_down.png",
-			"type": "image",
-			"name": "button_down_png"
-		},
-		{
-			"url": "assets/Button/button_up.png",
-			"type": "image",
-			"name": "button_up_png"
 		},
 		{
 			"url": "assets/ProgressBar/thumb_pb.png",

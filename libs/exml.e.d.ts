@@ -1,8 +1,4 @@
 declare module skins{
-	class ButtonSkin extends eui.Skin{
-	}
-}
-declare module skins{
 	class HScrollBarSkin extends eui.Skin{
 	}
 }
@@ -52,10 +48,6 @@ declare module skins{
 }
 declare module skins{
 	class StartButtonSkin extends eui.Skin{
-	}
-}
-declare module skins{
-	class TextInputSkin extends eui.Skin{
 	}
 }
 declare module skins{

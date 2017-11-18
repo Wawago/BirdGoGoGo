@@ -7,9 +7,9 @@ class PipeGroup {
     public static groundHeight:number = 210;
     public static pipeHeight:number = 753;
 	public static pipeWidth:number = 142;
-    public static pipeGapX:number = 400;
-	public static pipeGapY:number = 280;
-    public static minPipeHeight:number = 130;
+    public static pipeGapX:number = 480;
+	public static pipeGapY:number = 250;
+    public static minPipeHeight:number = 100;
 	private pipeRebornX:number;
 	private totalPipeLength:number;
 

@@ -14,9 +14,11 @@ class GameView extends egret.Sprite {
 	public pipeGroup3:PipeGroup;
 
 	// speeds
-	public static speedX:number = -2.5;
-	private gravity:number = 25;
-	private birdJumpSpeed:number = -13;
+	public static speedX:number = -3;
+	private gravity:number = 20;
+	private birdJumpVelocity:number = -10;
+	private birdJumpAngle:number = 0.8;
+	private birdJumpAngularVelocity:number = -5;
 
 	// game state
 	public isPrepared:boolean = false;
@@ -108,7 +110,9 @@ class GameView extends egret.Sprite {
 			if (!this.isStart)
 				this.gameStart();
 
-			this.birdBody.velocity[1] = this.birdJumpSpeed;
+			this.birdBody.velocity[1] = this.birdJumpVelocity;
+			this.birdBody.angle = this.birdJumpAngle;
+			this.birdBody.angularVelocity = this.birdJumpAngularVelocity;
 			this.bird.jump();
 		}
 	}
