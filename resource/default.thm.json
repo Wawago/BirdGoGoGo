@@ -17,17 +17,20 @@
   "autoGenerateExmlsList": true,
   "exmls": [
     "resource/eui_skins/ButtonSkin.exml",
-    "resource/eui_skins/CheckBoxSkin.exml",
     "resource/eui_skins/HScrollBarSkin.exml",
     "resource/eui_skins/HSliderSkin.exml",
     "resource/eui_skins/ItemRendererSkin.exml",
     "resource/eui_skins/PanelSkin.exml",
     "resource/eui_skins/ProgressBarSkin.exml",
-    "resource/eui_skins/RadioButtonSkin.exml",
+    "resource/eui_skins/RankButtonSkin.exml",
+    "resource/eui_skins/RankButtonSmallSkin.exml",
+    "resource/eui_skins/RestartButtonSkin.exml",
     "resource/eui_skins/ScrollerSkin.exml",
+    "resource/eui_skins/ShareButtonSkin.exml",
+    "resource/eui_skins/ShareButtonSmallSkin.exml",
+    "resource/eui_skins/SoundButtonSkin.exml",
+    "resource/eui_skins/StartButtonSkin.exml",
     "resource/eui_skins/TextInputSkin.exml",
-    "resource/eui_skins/ToggleSwitchSkin.exml",
-    "resource/eui_skins/VScrollBarSkin.exml",
-    "resource/eui_skins/VSliderSkin.exml"
+    "resource/eui_skins/VScrollBarSkin.exml"
   ]
 }

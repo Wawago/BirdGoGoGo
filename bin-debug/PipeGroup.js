@@ -13,57 +13,54 @@ var PipeGroup = (function () {
         var upperPipeHeight = this.getRandomPipeHeight();
         this.upperPipe = PipeGroup.createBlock(world, parent, GameData.stageW, // x
         upperPipeHeight - PipeGroup.pipeHeight, // y
-        PipeGroup.pipeWidth, // width
-        PipeGroup.pipeHeight, // height
         0, "upper_pipe_png");
-        this.lowerPipe = PipeGroup.createBlock(world, parent, GameData.stageW, upperPipeHeight + PipeGroup.pipeGapY, PipeGroup.pipeWidth, PipeGroup.pipeHeight, 0, "lower_pipe_png");
+        this.lowerPipe = PipeGroup.createBlock(world, parent, GameData.stageW, upperPipeHeight + PipeGroup.pipeGapY, 0, "lower_pipe_png");
         this.coin = this.createCoin(world, parent, GameData.stageW, upperPipeHeight + PipeGroup.pipeGapY / 2 - 85 / 2);
-        // this.coin.position[0] = this.upperPipe.position[0];
     };
     PipeGroup.prototype.createCoin = function (world, parent, x, y) {
+        var data = RES.getRes("coin_json");
+        var txtr = RES.getRes("coin_png");
+        var mcDataFactory = new egret.MovieClipDataFactory(data, txtr);
+        var mc = new egret.MovieClip(mcDataFactory.generateMovieClipData("coin"));
+        mc.anchorOffsetX = 0.5 * mc.width;
+        mc.anchorOffsetY = 0.5 * mc.height;
+        mc.gotoAndPlay("spin", -1);
+        parent.addChild(mc);
         var body = new p2.Body({
             mass: 1,
             fixedRotation: true,
-            position: P2Space.getP2Pos(x + 84 / 2, y + 85 / 2),
+            position: P2Space.getP2Pos(x + mc.width / 2, y + mc.height / 2),
             collisionResponse: false,
             type: p2.Body.KINEMATIC,
         });
-        world.addBody(body);
         var circle = new p2.Circle({
-            radius: P2Space.extentP2(84)
+            radius: P2Space.extentP2(mc.width / 2)
         });
         body.addShape(circle);
-        var bitmap = Utils.createBitmapByName("coin_png");
-        // bitmap.width = width;
-        // bitmap.height = height;
-        bitmap.anchorOffsetX = bitmap.width * 0.5;
-        bitmap.anchorOffsetY = bitmap.height * 0.5;
-        body.displays = [bitmap];
-        parent.addChild(bitmap);
+        body.displays = [mc];
+        world.addBody(body);
         return body;
     };
-    PipeGroup.createBlock = function (world, parent, x, y, width, height, vx, resName) {
+    PipeGroup.createBlock = function (world, parent, x, y, vx, resName) {
+        var bitmap = Utils.createBitmapByName(resName);
+        bitmap.anchorOffsetX = bitmap.width * 0.5;
+        bitmap.anchorOffsetY = bitmap.height * 0.5;
+        parent.addChild(bitmap);
         var body = new p2.Body({
             mass: 1,
             fixedRotation: true,
-            position: P2Space.getP2Pos(x + width / 2, y + height / 2),
+            position: P2Space.getP2Pos(x + bitmap.width / 2, y + bitmap.height / 2),
             // type: vx == 0 ? p2.Body.STATIC : p2.Body.KINEMATIC,
             type: p2.Body.KINEMATIC,
             velocity: [vx, 0]
         });
-        world.addBody(body);
         var box = new p2.Box({
-            width: P2Space.extentP2(width),
-            height: P2Space.extentP2(height)
+            width: P2Space.extentP2(bitmap.width),
+            height: P2Space.extentP2(bitmap.height)
         });
         body.addShape(box);
-        var bitmap = Utils.createBitmapByName(resName);
-        bitmap.width = width;
-        bitmap.height = height;
-        bitmap.anchorOffsetX = bitmap.width * 0.5;
-        bitmap.anchorOffsetY = bitmap.height * 0.5;
         body.displays = [bitmap];
-        parent.addChild(bitmap);
+        world.addBody(body);
         return body;
     };
     PipeGroup.prototype.updatePipePostions = function () {
@@ -101,8 +98,8 @@ var PipeGroup = (function () {
     PipeGroup.prototype.checkGetPoint = function (bird) {
         if (this.coin.overlaps(bird) && !this.haveGotPoint) {
             this.haveGotPoint = true;
-            this.sfxPoint.play(0, 1);
             this.coin.displays[0].visible = false;
+            SoundUtils.playSfxOnTime(this.sfxPoint);
             return true;
         }
         return false;

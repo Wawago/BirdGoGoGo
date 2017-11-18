@@ -15,9 +15,7 @@ var Bird = (function (_super) {
     __extends(Bird, _super);
     function Bird() {
         var _this = _super.call(this) || this;
-        _this.sfxDie = RES.getRes("sfx_die_mp3");
         _this.sfxHit = RES.getRes("sfx_hit_mp3");
-        _this.sfxPoint = RES.getRes("sfx_point_mp3");
         _this.sfxJump = RES.getRes("sfx_jump_mp3");
         _this.isAlive = true;
         _this.initView();
@@ -38,15 +36,12 @@ var Bird = (function (_super) {
         this.mc.gotoAndPlay("fly", -1);
     };
     Bird.prototype.jump = function () {
-        this.sfxJump.play(0, 1);
+        SoundUtils.playSfxOnTime(this.sfxJump);
     };
     Bird.prototype.die = function () {
         this.isAlive = false;
         this.mc.gotoAndPlay("die", 1);
-        this.sfxHit.play(0, 1);
-    };
-    Bird.prototype.point = function () {
-        this.sfxPoint.play(0, 1);
+        SoundUtils.playSfxOnTime(this.sfxHit);
     };
     Bird.prototype.dispose = function () {
         this.removeChildren();

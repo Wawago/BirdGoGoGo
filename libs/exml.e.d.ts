@@ -3,10 +3,6 @@ declare module skins{
 	}
 }
 declare module skins{
-	class CheckBoxSkin extends eui.Skin{
-	}
-}
-declare module skins{
 	class HScrollBarSkin extends eui.Skin{
 	}
 }
@@ -27,7 +23,15 @@ declare module skins{
 	}
 }
 declare module skins{
-	class RadioButtonSkin extends eui.Skin{
+	class RankButtonSkin extends eui.Skin{
+	}
+}
+declare module skins{
+	class RankButtonSmallSkin extends eui.Skin{
+	}
+}
+declare module skins{
+	class RestartButtonSkin extends eui.Skin{
 	}
 }
 declare module skins{
@@ -35,18 +39,26 @@ declare module skins{
 	}
 }
 declare module skins{
+	class ShareButtonSkin extends eui.Skin{
+	}
+}
+declare module skins{
+	class ShareButtonSmallSkin extends eui.Skin{
+	}
+}
+declare module skins{
+	class SoundButtonSkin extends eui.Skin{
+	}
+}
+declare module skins{
+	class StartButtonSkin extends eui.Skin{
+	}
+}
+declare module skins{
 	class TextInputSkin extends eui.Skin{
 	}
 }
 declare module skins{
-	class ToggleSwitchSkin extends eui.Skin{
-	}
-}
-declare module skins{
 	class VScrollBarSkin extends eui.Skin{
-	}
-}
-declare module skins{
-	class VSliderSkin extends eui.Skin{
 	}
 }

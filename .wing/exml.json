@@ -1,0 +1,10 @@
+{
+    "15fc38e1d78": {
+        "guideLinesEnabled": false
+    },
+    "15fc3d6d3ab": {
+        "path": "ScoreBoard.ts",
+        "class": "ScoreBoard",
+        "parentPath": "resource/eui_skins/PanelSkin.exml"
+    }
+}

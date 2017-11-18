@@ -1,9 +1,7 @@
 class Bird extends egret.Sprite {
 
     private mc:egret.MovieClip;
-    private sfxDie:egret.Sound = RES.getRes("sfx_die_mp3");
     private sfxHit:egret.Sound = RES.getRes("sfx_hit_mp3");
-    private sfxPoint:egret.Sound = RES.getRes("sfx_point_mp3");
     private sfxJump:egret.Sound = RES.getRes("sfx_jump_mp3");
 
     public isAlive:boolean = true;
@@ -32,17 +30,13 @@ class Bird extends egret.Sprite {
     }
 
     public jump():void {
-        this.sfxJump.play(0,1);
+        SoundUtils.playSfxOnTime(this.sfxJump)
     }
 
     public die():void {
         this.isAlive = false;
         this.mc.gotoAndPlay("die", 1);
-        this.sfxHit.play(0,1);
-    }
-
-    public point():void {
-        this.sfxPoint.play(0,1);
+        SoundUtils.playSfxOnTime(this.sfxHit);
     }
 
     public dispose():void {

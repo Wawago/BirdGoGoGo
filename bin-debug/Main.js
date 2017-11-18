@@ -66,6 +66,8 @@ var Main = (function (_super) {
         this.stage.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         //设置加载进度界面
         //Config to load process interface
+        GameData.stageW = this.stage.stageWidth;
+        GameData.stageH = this.stage.stageHeight;
         this.loadingView = new LoadingUI();
         this.stage.addChild(this.loadingView);
         //初始化Resource资源加载库
@@ -144,15 +146,40 @@ var Main = (function (_super) {
      */
     Main.prototype.createGameScene = function () {
         if (this.isThemeLoaded && this.isResourceLoaded) {
-            GameData.stageW = this.stage.stageWidth;
-            GameData.stageH = this.stage.stageHeight;
+            // this.gameView = new GameView();
+            // this.gameView.x = GameData.stageW/2;
+            // this.gameView.y = GameData.stageH/2;
+            // this.addChild(this.gameView);
+            this.startView = new StartView();
+            this.startView.x = GameData.stageW / 2;
+            this.startView.y = GameData.stageH / 2;
+            this.addChild(this.startView);
+            this.startView.addEventListener(GameData.gameStartEvent, this.onGameStart, this);
+            this.changeViewCurtain = new egret.Shape();
+            this.changeViewCurtain.graphics.beginFill(0x000000, 1);
+            this.changeViewCurtain.graphics.drawRect(0, 0, GameData.stageW, GameData.stageH);
+            this.changeViewCurtain.graphics.endFill();
+            this.changeViewCurtain.alpha = 0;
+        }
+    };
+    Main.prototype.onGameStart = function () {
+        this.startView.end();
+        this.addChild(this.changeViewCurtain);
+        egret.Tween.get(this.changeViewCurtain)
+            .to({ alpha: 1 }, 300)
+            .call(function () {
+            this.removeChild(this.startView);
+            this.startView.removeEventListener(GameData.gameStartEvent, this.onGameStart, this);
+            this.startView = null;
             this.gameView = new GameView();
             this.gameView.x = GameData.stageW / 2;
             this.gameView.y = GameData.stageH / 2;
-            // this.gameView.width = GameData.stageW;
-            // this.gameView.height = GameData.stageH;
-            this.addChild(this.gameView);
-        }
+            this.addChildAt(this.gameView, 0);
+        }, this)
+            .to({ alpha: 0 }, 300)
+            .call(function () {
+            this.removeChild(this.changeViewCurtain);
+        }, this);
     };
     return Main;
 }(egret.DisplayObjectContainer));

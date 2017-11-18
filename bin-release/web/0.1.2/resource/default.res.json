@@ -1,0 +1,185 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,bird_png,bird_json,background_png,ground_png,lower_pipe_png,upper_pipe_png,sfx_hit_mp3,sfx_point_mp3,sfx_jump_mp3,button_down_png,button_up_png,thumb_pb_png,track_pb_png,roundthumb_png,track_sb_png,coin_png,coin_json,tongnianti_ttf,sound_off_btn_png,sound_on_btn_png,start_btn_png,logo_png,share_btn_png,rank_btn_png,gameover_panel_png,restart_btn_png,guide_png,share_btn_s_png,rank_btn_s_png,font_red_fnt,font_red_png,font_grey_fnt,font_grey_png,scoreboard_png",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/bird.png",
+			"type": "image",
+			"name": "bird_png"
+		},
+		{
+			"url": "config/bird.json",
+			"type": "json",
+			"name": "bird_json"
+		},
+		{
+			"url": "assets/background.png",
+			"type": "image",
+			"name": "background_png"
+		},
+		{
+			"url": "assets/ground.png",
+			"type": "image",
+			"name": "ground_png"
+		},
+		{
+			"url": "assets/lower_pipe.png",
+			"type": "image",
+			"name": "lower_pipe_png"
+		},
+		{
+			"url": "assets/upper_pipe.png",
+			"type": "image",
+			"name": "upper_pipe_png"
+		},
+		{
+			"url": "sounds/sfx_hit.mp3",
+			"type": "sound",
+			"name": "sfx_hit_mp3"
+		},
+		{
+			"url": "sounds/sfx_point.mp3",
+			"type": "sound",
+			"name": "sfx_point_mp3"
+		},
+		{
+			"url": "sounds/sfx_jump.mp3",
+			"type": "sound",
+			"name": "sfx_jump_mp3"
+		},
+		{
+			"url": "assets/Button/button_down.png",
+			"type": "image",
+			"name": "button_down_png"
+		},
+		{
+			"url": "assets/Button/button_up.png",
+			"type": "image",
+			"name": "button_up_png"
+		},
+		{
+			"url": "assets/ProgressBar/thumb_pb.png",
+			"type": "image",
+			"name": "thumb_pb_png"
+		},
+		{
+			"url": "assets/ProgressBar/track_pb.png",
+			"type": "image",
+			"name": "track_pb_png"
+		},
+		{
+			"url": "assets/ScrollBar/roundthumb.png",
+			"type": "image",
+			"name": "roundthumb_png"
+		},
+		{
+			"url": "assets/ScrollBar/track_sb.png",
+			"type": "image",
+			"name": "track_sb_png"
+		},
+		{
+			"url": "assets/coin.png",
+			"type": "image",
+			"name": "coin_png"
+		},
+		{
+			"url": "config/coin.json",
+			"type": "json",
+			"name": "coin_json"
+		},
+		{
+			"url": "tongnianti.ttf",
+			"type": "bin",
+			"name": "tongnianti_ttf"
+		},
+		{
+			"url": "assets/Button/sound_off_btn.png",
+			"type": "image",
+			"name": "sound_off_btn_png"
+		},
+		{
+			"url": "assets/Button/sound_on_btn.png",
+			"type": "image",
+			"name": "sound_on_btn_png"
+		},
+		{
+			"url": "assets/Button/start_btn.png",
+			"type": "image",
+			"name": "start_btn_png"
+		},
+		{
+			"url": "assets/logo.png",
+			"type": "image",
+			"name": "logo_png"
+		},
+		{
+			"url": "assets/Button/share_btn.png",
+			"type": "image",
+			"name": "share_btn_png"
+		},
+		{
+			"url": "assets/Button/rank_btn.png",
+			"type": "image",
+			"name": "rank_btn_png"
+		},
+		{
+			"url": "assets/gameover_panel.png",
+			"type": "image",
+			"name": "gameover_panel_png"
+		},
+		{
+			"url": "assets/Button/restart_btn.png",
+			"type": "image",
+			"name": "restart_btn_png"
+		},
+		{
+			"url": "assets/guide.png",
+			"type": "image",
+			"name": "guide_png"
+		},
+		{
+			"name": "share_btn_s_png",
+			"type": "image",
+			"url": "assets/Button/share_btn_s.png"
+		},
+		{
+			"name": "rank_btn_s_png",
+			"type": "image",
+			"url": "assets/Button/rank_btn_s.png"
+		},
+		{
+			"name": "font_red_fnt",
+			"type": "font",
+			"url": "fonts/font_red.fnt"
+		},
+		{
+			"name": "font_red_png",
+			"type": "image",
+			"url": "fonts/font_red.png"
+		},
+		{
+			"name": "font_grey_fnt",
+			"type": "font",
+			"url": "fonts/font_grey.fnt"
+		},
+		{
+			"name": "font_grey_png",
+			"type": "image",
+			"url": "fonts/font_grey.png"
+		},
+		{
+			"name": "scoreboard_png",
+			"type": "image",
+			"url": "assets/scoreboard.png"
+		}
+	]
+}

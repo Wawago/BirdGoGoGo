@@ -4,15 +4,16 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var GameData = (function () {
     function GameData() {
     }
-    GameData.stageW = 0;
-    GameData.stageH = 0;
-    GameData.closeMusic = false;
-    GameData.closeBgMusic = false;
+    GameData.gameStartEvent = "gameStart";
+    GameData.gameRestartEvent = "gameRestart";
+    GameData.stageW = 640;
+    GameData.stageH = 1136;
+    GameData.isSoundOn = true;
     GameData.isStart = false;
-    GameData.curScene = 1;
+    // public static curScene:number = 1;
     GameData.isPause = true;
-    GameData.bgSpeed = 0;
     GameData.score = 0;
+    GameData.highestScore = 0;
     return GameData;
 }());
 __reflect(GameData.prototype, "GameData");

@@ -29,77 +29,68 @@ class PipeGroup {
         this.upperPipe = PipeGroup.createBlock(world, parent, 
             GameData.stageW,                        // x
             upperPipeHeight-PipeGroup.pipeHeight,   // y
-            PipeGroup.pipeWidth,                    // width
-            PipeGroup.pipeHeight,                   // height
             0, "upper_pipe_png");
 
 		this.lowerPipe = PipeGroup.createBlock(world, parent, 
             GameData.stageW, 
             upperPipeHeight+PipeGroup.pipeGapY, 
-            PipeGroup.pipeWidth, 
-            PipeGroup.pipeHeight, 
             0, "lower_pipe_png");
 
-        this.coin = this.createCoin(world, parent, GameData.stageW, upperPipeHeight+PipeGroup.pipeGapY/2-85/2);
-        // this.coin.position[0] = this.upperPipe.position[0];
+        this.coin = this.createCoin(world, parent, 
+            GameData.stageW, 
+            upperPipeHeight+PipeGroup.pipeGapY/2-85/2);
     }
 
     public createCoin(world:p2.World, parent:egret.Sprite, x:number, y:number):p2.Body {
+        let data = RES.getRes("coin_json");
+        let txtr = RES.getRes("coin_png"); 
+        let mcDataFactory = new egret.MovieClipDataFactory(data, txtr);
+        var mc = new egret.MovieClip(mcDataFactory.generateMovieClipData("coin"));
+        mc.anchorOffsetX = 0.5*mc.width;
+        mc.anchorOffsetY = 0.5*mc.height;
+        mc.gotoAndPlay("spin", -1);
+        parent.addChild(mc);
+
         var body:p2.Body = new p2.Body({
 			mass:1,
 			fixedRotation: true,
-			position: P2Space.getP2Pos(x+84/2, y+85/2),
+			position: P2Space.getP2Pos(x+mc.width/2, y+mc.height/2),
             collisionResponse: false,
             type: p2.Body.KINEMATIC,
         });
-
-        world.addBody(body);
-
         var circle:p2.Circle = new p2.Circle({
-            radius: P2Space.extentP2(84)
+            radius: P2Space.extentP2(mc.width/2)
         })
 
         body.addShape(circle);
-
-        var bitmap:egret.Bitmap = Utils.createBitmapByName("coin_png");
-		// bitmap.width = width;
-		// bitmap.height = height;
-		bitmap.anchorOffsetX = bitmap.width*0.5;
-		bitmap.anchorOffsetY = bitmap.height*0.5;
-		body.displays = [bitmap];
-
-		parent.addChild(bitmap);
+		body.displays = [mc];
+        world.addBody(body);
 
         return body;
     }
 
-    public static createBlock(world:p2.World, parent:egret.Sprite, x:number, y:number, width:number, height:number, vx:number, resName:string):p2.Body {
-		var body:p2.Body = new p2.Body({
+    public static createBlock(world:p2.World, parent:egret.Sprite, x:number, y:number, vx:number, resName:string):p2.Body {
+		var bitmap:egret.Bitmap = Utils.createBitmapByName(resName);
+		bitmap.anchorOffsetX = bitmap.width*0.5;
+		bitmap.anchorOffsetY = bitmap.height*0.5;
+		parent.addChild(bitmap);
+
+        var body:p2.Body = new p2.Body({
 			mass:1,
 			fixedRotation: true,
-			position: P2Space.getP2Pos(x+width/2, y+height/2),
+			position: P2Space.getP2Pos(x+bitmap.width/2, y+bitmap.height/2),
 			// type: vx == 0 ? p2.Body.STATIC : p2.Body.KINEMATIC,
             type: p2.Body.KINEMATIC,
 			velocity:[ vx, 0 ]
         });
-
-		world.addBody(body);
-
 		var box:p2.Box = new p2.Box({
-			width : P2Space.extentP2(width),
-			height : P2Space.extentP2(height) 
+			width : P2Space.extentP2(bitmap.width),
+			height : P2Space.extentP2(bitmap.height) 
         });
 
 		body.addShape(box);
-
-		var bitmap:egret.Bitmap = Utils.createBitmapByName(resName);
-		bitmap.width = width;
-		bitmap.height = height;
-		bitmap.anchorOffsetX = bitmap.width*0.5;
-		bitmap.anchorOffsetY = bitmap.height*0.5;
-		body.displays = [bitmap];
-
-		parent.addChild(bitmap);
+        body.displays = [bitmap];
+        world.addBody(body);
 
 		return body;
 	}
@@ -130,7 +121,7 @@ class PipeGroup {
     public stop() {
         this.upperPipe.velocity[0] = 0;
         this.lowerPipe.velocity[0] = 0;
-        this.coin.velocity[0] = 0
+        this.coin.velocity[0] = 0;
     }
 
     public start() {
@@ -146,8 +137,8 @@ class PipeGroup {
     public checkGetPoint(bird:p2.Body):boolean {
         if (this.coin.overlaps(bird) && !this.haveGotPoint) {
             this.haveGotPoint = true;
-            this.sfxPoint.play(0, 1);
-            this.coin.displays[0].visible = false
+            this.coin.displays[0].visible = false;
+            SoundUtils.playSfxOnTime(this.sfxPoint);
             return true;
         }
         return false;

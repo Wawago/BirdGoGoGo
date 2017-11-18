@@ -19,6 +19,7 @@ var GameView = (function (_super) {
         _this.gravity = 25;
         _this.birdJumpSpeed = -13;
         // game state
+        _this.isPrepared = false;
         _this.isStart = false;
         _this.initView();
         _this.initSprites();
@@ -49,7 +50,7 @@ var GameView = (function (_super) {
         this.createBird();
         this.createPipeGroups();
         // create groud sprite
-        this.groundBody = PipeGroup.createBlock(this.world, this, 0, GameData.stageH - PipeGroup.groundHeight, GameData.stageW * 2, PipeGroup.groundHeight, 0, "ground_png");
+        this.groundBody = PipeGroup.createBlock(this.world, this, 0, GameData.stageH - PipeGroup.groundHeight, 0, "ground_png");
     };
     GameView.prototype.initContactMaterials = function () {
         var birdMaterial = new p2.Material(0);
@@ -71,23 +72,55 @@ var GameView = (function (_super) {
         });
         this.world.addContactMaterial(birdGroundContactMaterial);
     };
+    GameView.prototype.initEvents = function () {
+        // update for each frame
+        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
+        // register touch event
+        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchScreen, this);
+    };
+    GameView.prototype.onTouchScreen = function () {
+        if (this.bird.isAlive) {
+            if (!this.isPrepared)
+                this.prepareGameStart();
+            if (!this.isStart)
+                this.gameStart();
+            this.birdBody.velocity[1] = this.birdJumpSpeed;
+            this.bird.jump();
+        }
+    };
     GameView.prototype.initGUI = function () {
-        this.startButton = new eui.Button();
-        this.startButton.label = "Go!";
-        this.startButton.horizontalCenter = 0;
-        this.startButton.verticalCenter = 0;
-        // this.startButton.percentWidth = 20;
-        // this.startButton.percentHeight = 80;
-        // this.startButton.width = 100;
-        // this.startButton.height = 30;
-        // console.log(this.startButton.getBounds().width);
-        this.startButton.x = GameData.stageW / 2 - 100 / 2;
-        this.startButton.y = GameData.stageH / 2 - 50 / 2;
-        this.addChild(this.startButton);
-        this.startButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.gameStart, this);
-        this.scoreLabel = new eui.Label();
-        this.updateScoreLabel();
+        this.guide = Utils.createBitmapByName("guide_png");
+        this.guide.x = this.width / 2 - 30;
+        this.guide.y = 400;
+        this.addChild(this.guide);
+        var scoreboard = Utils.createBitmapByName("scoreboard_png");
+        scoreboard.anchorOffsetX = scoreboard.width * 0.5;
+        scoreboard.x = this.width / 2;
+        scoreboard.y = 0;
+        this.addChild(scoreboard);
+        this.scoreLabel = new egret.BitmapText();
+        this.scoreLabel.scaleX = 0.5;
+        this.scoreLabel.scaleY = 0.5;
+        this.scoreLabel.font = GameData.fontRed;
+        this.scoreLabel.x = this.width / 2 + 20;
+        this.scoreLabel.y = 18;
         this.addChild(this.scoreLabel);
+        this.updateScoreLabel();
+        this.soundButton = new eui.Button();
+        this.soundButton.x = GameData.stageW - 20 - 79;
+        this.soundButton.y = 20;
+        this.soundButton.skinName = "skins.SoundButtonSkin";
+        this.soundButton.touchEnabled = true;
+        this.addChild(this.soundButton);
+        this.updateSoundButton();
+        this.soundButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSoundButton, this);
+    };
+    GameView.prototype.onSoundButton = function () {
+        GameData.isSoundOn = !GameData.isSoundOn;
+        this.updateSoundButton();
+    };
+    GameView.prototype.updateSoundButton = function () {
+        this.soundButton.currentState = GameData.isSoundOn ? "on" : "off";
     };
     GameView.prototype.createPipeGroups = function () {
         this.pipeGroup1 = new PipeGroup(this.world, this);
@@ -95,7 +128,6 @@ var GameView = (function (_super) {
         this.pipeGroup3 = new PipeGroup(this.world, this);
     };
     GameView.prototype.createBird = function () {
-        // create bird sprite
         this.bird = new Bird();
         this.bird.x = GameData.stageW / 3;
         this.bird.y = GameData.stageH / 2;
@@ -107,28 +139,12 @@ var GameView = (function (_super) {
             allowSleep: false
         });
         this.birdBody.angularDamping = 0.98;
-        // var box = new p2.Box({
-        // 	width: P2Space.extentP2(this.birdBodyWidth),
-        // 	height: P2Space.extentP2(this.birdBodyHeight)
-        // })
         var circle = new p2.Circle({
             radius: P2Space.extentP2(this.birdBodyRadius)
         });
         this.birdBody.addShape(circle);
         this.world.addBody(this.birdBody);
         this.birdBody.displays = [this.bird];
-    };
-    GameView.prototype.initEvents = function () {
-        // update for each frame
-        this.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
-        // register touch event
-        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onTouchScreen, this);
-    };
-    GameView.prototype.onTouchScreen = function () {
-        if (this.isStart && this.bird.isAlive) {
-            this.birdBody.velocity[1] = this.birdJumpSpeed;
-            this.bird.jump();
-        }
     };
     GameView.prototype.onEnterFrame = function () {
         this.world.step(60 / 1000);
@@ -163,14 +179,24 @@ var GameView = (function (_super) {
         }
     };
     GameView.prototype.updateScoreLabel = function () {
-        this.scoreLabel.text = "SCORE: " + GameData.score;
+        this.scoreLabel.text = "" + GameData.score;
     };
     GameView.prototype.gameStart = function () {
-        this.startButton.visible = false;
         this.isStart = true;
-        GameData.score = 0;
-        this.updateScoreLabel();
+        // resume velocity
+        this.groundBody.velocity[0] = GameView.speedX;
+        this.pipeGroup1.start();
+        this.pipeGroup2.start();
+        this.pipeGroup3.start();
+        this.world.gravity[1] = this.gravity;
+    };
+    GameView.prototype.prepareGameStart = function () {
+        if (this.guide && this.guide.parent)
+            this.guide.parent.removeChild(this.guide);
+        if (this.gameOverPanel && this.gameOverPanel.parent)
+            this.gameOverPanel.parent.removeChild(this.gameOverPanel);
         // reset sprite positions and states
+        this.world.gravity[1] = 0;
         this.birdBody.position = P2Space.getP2Pos(GameData.stageW / 3, GameData.stageH / 2);
         this.birdBody.velocity = [0, 0];
         this.birdBody.angle = 0;
@@ -179,14 +205,14 @@ var GameView = (function (_super) {
         this.pipeGroup1.moveToX(GameData.stageW + PipeGroup.pipeWidth / 2);
         this.pipeGroup2.moveToX(GameData.stageW + PipeGroup.pipeWidth / 2 + PipeGroup.pipeGapX);
         this.pipeGroup3.moveToX(GameData.stageW + PipeGroup.pipeWidth / 2 + PipeGroup.pipeGapX * 2);
-        // resume velocity
-        this.groundBody.velocity[0] = GameView.speedX;
-        this.pipeGroup1.start();
-        this.pipeGroup2.start();
-        this.pipeGroup3.start();
-        this.world.gravity[1] = this.gravity;
+        // reset current score
+        GameData.score = 0;
+        this.updateScoreLabel();
+        this.isPrepared = true;
     };
     GameView.prototype.gameOver = function () {
+        this.updateHighestScore();
+        this.isPrepared = false;
         this.isStart = false;
         this.groundBody.velocity[0] = 0;
         this.pipeGroup1.stop();
@@ -194,11 +220,21 @@ var GameView = (function (_super) {
         this.pipeGroup3.stop();
         this.bird.die();
         ShakeUtils.getInstance().shakeObj(this, 0.5, 10, 8);
-        egret.setTimeout(this.showRestartButton, this, 500);
+        egret.setTimeout(this.showGameOverPanel, this, 500);
     };
-    GameView.prototype.showRestartButton = function () {
-        this.startButton.label = "Restart";
-        this.startButton.visible = true;
+    GameView.prototype.updateHighestScore = function () {
+        if (GameData.score > GameData.highestScore)
+            GameData.highestScore = GameData.score;
+    };
+    GameView.prototype.showGameOverPanel = function () {
+        if (this.gameOverPanel == null) {
+            this.gameOverPanel = new GameOverPanel();
+            this.gameOverPanel.x = this.width / 2;
+            this.gameOverPanel.y = this.height / 2;
+            this.gameOverPanel.addEventListener(GameData.gameRestartEvent, this.prepareGameStart, this);
+        }
+        this.addChild(this.gameOverPanel);
+        this.gameOverPanel.updateGUI();
     };
     // speeds
     GameView.speedX = -2.5;
