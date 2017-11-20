@@ -20,6 +20,7 @@ var StartView = (function (_super) {
         _this.startButtonHeight = 103;
         _this.soundButtonWidth = 79;
         _this.rankButtonWidth = 192;
+        _this.music = RES.getRes("music_start_mp3");
         _this.initView();
         _this.initGUI();
         return _this;
@@ -76,7 +77,6 @@ var StartView = (function (_super) {
         this.soundButton.y = 20;
         this.soundButton.skinName = "skins.SoundButtonSkin";
         this.addChild(this.soundButton);
-        this.updateSoundButton();
         this.soundButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSoundButton, this);
         // ground
         this.ground = Utils.createBitmapByName("ground_png");
@@ -91,6 +91,9 @@ var StartView = (function (_super) {
         // fonts
         GameData.fontRed = RES.getRes("font_red_fnt");
         GameData.fontGrey = RES.getRes("font_grey_fnt");
+        // music
+        this.musicChanel = SoundUtils.playMusic(this.music);
+        this.updateSoundButton();
     };
     StartView.prototype.onGroundComplete = function () {
         this.ground.x = GameData.stageW;
@@ -108,14 +111,20 @@ var StartView = (function (_super) {
     };
     StartView.prototype.updateSoundButton = function () {
         this.soundButton.currentState = GameData.isSoundOn ? "on" : "off";
+        if (this.musicChanel) {
+            this.musicChanel.volume = GameData.isSoundOn ? 1 : 0;
+        }
     };
     StartView.prototype.end = function () {
         this.startButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onStartButton, this);
         this.rankButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onRankButton, this);
         this.shareButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onShareButton, this);
         this.soundButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onSoundButton, this);
+        if (this.musicChanel) {
+            this.musicChanel.stop();
+            this.musicChanel = null;
+        }
     };
     return StartView;
 }(egret.Sprite));
 __reflect(StartView.prototype, "StartView");
-//# sourceMappingURL=StartView.js.map

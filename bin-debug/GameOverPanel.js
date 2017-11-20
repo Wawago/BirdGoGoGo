@@ -94,4 +94,3 @@ var GameOverPanel = (function (_super) {
     return GameOverPanel;
 }(egret.Sprite));
 __reflect(GameOverPanel.prototype, "GameOverPanel");
-//# sourceMappingURL=GameOverPanel.js.map

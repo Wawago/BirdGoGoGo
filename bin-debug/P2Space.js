@@ -83,4 +83,3 @@ var P2Space = (function () {
     return P2Space;
 }());
 __reflect(P2Space.prototype, "P2Space");
-//# sourceMappingURL=P2Space.js.map

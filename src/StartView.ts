@@ -16,6 +16,9 @@ class StartView extends egret.Sprite {
     private soundButtonWidth:number = 79;
     private rankButtonWidth:number = 192;
 
+    private music:egret.Sound = RES.getRes("music_start_mp3");
+    private musicChanel:egret.SoundChannel;
+
     constructor() {
 		super();
 
@@ -83,7 +86,6 @@ class StartView extends egret.Sprite {
 		this.soundButton.y = 20;
 		this.soundButton.skinName = "skins.SoundButtonSkin";
 		this.addChild(this.soundButton);
-        this.updateSoundButton();
 		this.soundButton.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onSoundButton, this);
 
         // ground
@@ -100,6 +102,10 @@ class StartView extends egret.Sprite {
         // fonts
         GameData.fontRed = RES.getRes("font_red_fnt");
         GameData.fontGrey = RES.getRes("font_grey_fnt");
+
+        // music
+        this.musicChanel = SoundUtils.playMusic(this.music);
+        this.updateSoundButton();
     }
 
     private onGroundComplete() {
@@ -125,6 +131,9 @@ class StartView extends egret.Sprite {
 
     private updateSoundButton() {
         this.soundButton.currentState = GameData.isSoundOn ? "on" : "off";
+        if (this.musicChanel) {
+            this.musicChanel.volume = GameData.isSoundOn ? 1 : 0;
+        }
     }
 
     public end() {
@@ -132,5 +141,9 @@ class StartView extends egret.Sprite {
         this.rankButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onRankButton, this);
         this.shareButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onShareButton, this);
         this.soundButton.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onSoundButton, this);
+        if (this.musicChanel) {
+            this.musicChanel.stop();
+            this.musicChanel = null;
+        }
     }
 }

@@ -99,7 +99,7 @@ var PipeGroup = (function () {
         if (this.coin.overlaps(bird) && !this.haveGotPoint) {
             this.haveGotPoint = true;
             this.coin.displays[0].visible = false;
-            SoundUtils.playSfxOnTime(this.sfxPoint);
+            SoundUtils.playSfxOneTime(this.sfxPoint);
             return true;
         }
         return false;
@@ -113,4 +113,3 @@ var PipeGroup = (function () {
     return PipeGroup;
 }());
 __reflect(PipeGroup.prototype, "PipeGroup");
-//# sourceMappingURL=PipeGroup.js.map

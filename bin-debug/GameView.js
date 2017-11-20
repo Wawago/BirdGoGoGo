@@ -17,12 +17,14 @@ var GameView = (function (_super) {
         var _this = _super.call(this) || this;
         _this.birdBodyRadius = 38;
         _this.gravity = 20;
-        _this.birdJumpVelocity = -10;
+        _this.birdJumpVelocity = -10.5;
         _this.birdJumpAngle = 0.8;
         _this.birdJumpAngularVelocity = -5;
         // game state
         _this.isPrepared = false;
         _this.isStart = false;
+        // music
+        _this.music = RES.getRes("music_game_mp3");
         _this.initView();
         _this.initSprites();
         _this.initContactMaterials();
@@ -125,6 +127,9 @@ var GameView = (function (_super) {
     };
     GameView.prototype.updateSoundButton = function () {
         this.soundButton.currentState = GameData.isSoundOn ? "on" : "off";
+        if (this.musicChanel) {
+            this.musicChanel.volume = GameData.isSoundOn ? 1 : 0;
+        }
     };
     GameView.prototype.createPipeGroups = function () {
         this.pipeGroup1 = new PipeGroup(this.world, this);
@@ -193,6 +198,9 @@ var GameView = (function (_super) {
         this.pipeGroup2.start();
         this.pipeGroup3.start();
         this.world.gravity[1] = this.gravity;
+        // play music
+        this.musicChanel = SoundUtils.playMusic(this.music);
+        this.updateSoundButton();
     };
     GameView.prototype.prepareGameStart = function () {
         if (this.guide && this.guide.parent)
@@ -222,6 +230,11 @@ var GameView = (function (_super) {
         this.pipeGroup1.stop();
         this.pipeGroup2.stop();
         this.pipeGroup3.stop();
+        // stop music
+        if (this.musicChanel) {
+            this.musicChanel.stop();
+            this.musicChanel = null;
+        }
         this.bird.die();
         ShakeUtils.getInstance().shakeObj(this, 0.5, 10, 8);
         egret.setTimeout(this.showGameOverPanel, this, 500);
@@ -245,4 +258,3 @@ var GameView = (function (_super) {
     return GameView;
 }(egret.Sprite));
 __reflect(GameView.prototype, "GameView");
-//# sourceMappingURL=GameView.js.map

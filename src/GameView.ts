@@ -16,7 +16,7 @@ class GameView extends egret.Sprite {
 	// speeds
 	public static speedX:number = -3;
 	private gravity:number = 20;
-	private birdJumpVelocity:number = -10;
+	private birdJumpVelocity:number = -10.5;
 	private birdJumpAngle:number = 0.8;
 	private birdJumpAngularVelocity:number = -5;
 
@@ -29,6 +29,10 @@ class GameView extends egret.Sprite {
 	public soundButton:eui.Button;
 	public guide:egret.Bitmap;
 	public gameOverPanel:GameOverPanel;
+
+	// music
+	private music:egret.Sound = RES.getRes("music_game_mp3");
+    private musicChanel:egret.SoundChannel;
 
 	constructor() {
 		super();
@@ -155,6 +159,9 @@ class GameView extends egret.Sprite {
 
 	private updateSoundButton() {
         this.soundButton.currentState = GameData.isSoundOn ? "on" : "off";
+		if (this.musicChanel) {
+            this.musicChanel.volume = GameData.isSoundOn ? 1 : 0;
+        }
     }
 
 	private createPipeGroups() {
@@ -237,6 +244,10 @@ class GameView extends egret.Sprite {
 		this.pipeGroup2.start();
 		this.pipeGroup3.start();
 		this.world.gravity[1] = this.gravity;
+
+		// play music
+		this.musicChanel = SoundUtils.playMusic(this.music);
+        this.updateSoundButton();
 	}
 
 	private prepareGameStart() {
@@ -274,6 +285,12 @@ class GameView extends egret.Sprite {
 		this.pipeGroup2.stop();
 		this.pipeGroup3.stop();
 
+		// stop music
+		if (this.musicChanel) {
+			this.musicChanel.stop();
+			this.musicChanel = null;
+		}
+			
 		this.bird.die();
 		ShakeUtils.getInstance().shakeObj(this, 0.5, 10, 8);
 		egret.setTimeout(this.showGameOverPanel, this, 500);

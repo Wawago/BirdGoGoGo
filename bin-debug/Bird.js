@@ -36,12 +36,12 @@ var Bird = (function (_super) {
         this.mc.gotoAndPlay("fly", -1);
     };
     Bird.prototype.jump = function () {
-        SoundUtils.playSfxOnTime(this.sfxJump);
+        SoundUtils.playSfxOneTime(this.sfxJump);
     };
     Bird.prototype.die = function () {
         this.isAlive = false;
         this.mc.gotoAndPlay("die", 1);
-        SoundUtils.playSfxOnTime(this.sfxHit);
+        SoundUtils.playSfxOneTime(this.sfxHit);
     };
     Bird.prototype.dispose = function () {
         this.removeChildren();
@@ -49,4 +49,3 @@ var Bird = (function (_super) {
     return Bird;
 }(egret.Sprite));
 __reflect(Bird.prototype, "Bird");
-//# sourceMappingURL=Bird.js.map

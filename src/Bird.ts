@@ -30,13 +30,13 @@ class Bird extends egret.Sprite {
     }
 
     public jump():void {
-        SoundUtils.playSfxOnTime(this.sfxJump)
+        SoundUtils.playSfxOneTime(this.sfxJump)
     }
 
     public die():void {
         this.isAlive = false;
         this.mc.gotoAndPlay("die", 1);
-        SoundUtils.playSfxOnTime(this.sfxHit);
+        SoundUtils.playSfxOneTime(this.sfxHit);
     }
 
     public dispose():void {

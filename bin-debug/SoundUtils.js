@@ -4,12 +4,14 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 var SoundUtils = (function () {
     function SoundUtils() {
     }
-    SoundUtils.playSfxOnTime = function (sfx) {
+    SoundUtils.playSfxOneTime = function (sfx) {
         if (GameData.isSoundOn) {
             sfx.play(0, 1);
         }
     };
+    SoundUtils.playMusic = function (music) {
+        return music.play(0, -1);
+    };
     return SoundUtils;
 }());
 __reflect(SoundUtils.prototype, "SoundUtils");
-//# sourceMappingURL=SoundUtils.js.map

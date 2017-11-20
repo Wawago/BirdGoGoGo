@@ -71,6 +71,8 @@ class Main extends egret.DisplayObjectContainer {
 
         //设置加载进度界面
         //Config to load process interface
+        console.log(this.stage.stageWidth);
+        console.log(this.stage.stageHeight);
         GameData.stageW = this.stage.stageWidth;
         GameData.stageH = this.stage.stageHeight;
         this.loadingView = new LoadingUI();
